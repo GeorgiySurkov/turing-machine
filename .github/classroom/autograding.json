@@ -2,7 +2,7 @@
   "tests": [
     {
       "name": "Test 1",
-      "setup": "make Makefile",
+      "setup": "make",
       "run": "./tm tests/2-MT.txt tests/2-input.txt output && cmp -s output tests/2-output.txt",
       "input": "",
       "output": "",
