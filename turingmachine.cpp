@@ -71,7 +71,7 @@ const Rule &Program::getRule(state_t fromState, alphabet_t fromSymbol) const {
         throw rule_not_found();
     } else {
         char buff[256];
-        snprintf(buff, 256, "No rule for state s%d, symbol %d", fromState, fromSymbol);
+        snprintf(buff, 256, "No rule for state q%d, symbol %d", fromState, fromSymbol);
         throw std::runtime_error(buff);
     }
 }
