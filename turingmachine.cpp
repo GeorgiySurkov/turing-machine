@@ -1,4 +1,5 @@
 #include "turingmachine.h"
+#include "helpers.h"
 
 #include <iostream>
 
@@ -14,7 +15,7 @@ void Program::readFromStream(std::istream &is) {
     const char *delims = " ", *token;
     bool firstStateNotEncountered = true;
     while (is.getline(buff, buffSize)) {
-        token = strtok(buff, delims);
+        token = my_strtok(buff, delims);
         checkToken(token)
         currRule.fromState = parseState(token);
         if (firstStateNotEncountered) {
@@ -22,31 +23,31 @@ void Program::readFromStream(std::istream &is) {
             firstStateNotEncountered = false;
         }
 
-        token = strtok(nullptr, delims);
+        token = my_strtok(nullptr, delims);
         checkToken(token)
         currRule.fromSymbol = parseSymbol(token);
 
-        token = strtok(nullptr, delims);
+        token = my_strtok(nullptr, delims);
         checkToken(token)
-        if (strcmp(token, "->") != 0) {
+        if (my_strcmp(token, "->") != 0) {
             throw std::invalid_argument("Invalid arrow sign");
         }
 
-        token = strtok(nullptr, delims);
+        token = my_strtok(nullptr, delims);
         checkToken(token)
         currRule.toState = parseState(token);
 
-        token = strtok(nullptr, delims);
+        token = my_strtok(nullptr, delims);
         checkToken(token)
         currRule.toSymbol = parseSymbol(token);
 
-        token = strtok(nullptr, delims);
+        token = my_strtok(nullptr, delims);
         checkToken(token)
-        if (strcmp(token, "L") == 0) {
+        if (my_strcmp(token, "L") == 0) {
             currRule.move = MOVE_LEFT;
-        } else if (strcmp(token, "R") == 0) {
+        } else if (my_strcmp(token, "R") == 0) {
             currRule.move = MOVE_RIGHT;
-        } else if (strcmp(token, "N") == 0) {
+        } else if (my_strcmp(token, "N") == 0) {
             currRule.move = MOVE_STAY;
         } else {
             throw std::invalid_argument("Invalid move sign");

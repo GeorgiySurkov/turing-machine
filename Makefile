@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -pedantic-errors
 LDFLAGS=
-SOURCES=main.cpp turingmachine.cpp
+SOURCES=main.cpp turingmachine.cpp helpers.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=tm
 
