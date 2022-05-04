@@ -58,22 +58,12 @@ void Program::readFromStream(std::istream &is) {
 }
 
 const Rule &Program::getRule(state_t fromState, alphabet_t fromSymbol) const {
-    bool stateExists = false;
     for (Vector<Rule>::iterator it = _rules.begin(); it != _rules.end(); ++it) {
-        if (it->fromState == fromState) {
-            stateExists = true;
-            if (it->fromSymbol == fromSymbol) {
-                return *it;
-            }
+        if (it->fromState == fromState && it->fromSymbol == fromSymbol) {
+            return *it;
         }
     }
-    if (stateExists) {
-        throw rule_not_found();
-    } else {
-        char buff[256];
-        snprintf(buff, 256, "No rule for state q%d, symbol %d", fromState, fromSymbol);
-        throw std::runtime_error(buff);
-    }
+    throw rule_not_found();
 }
 
 state_t Program::parseState(const char *s) {
